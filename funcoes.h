@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <windows.h>
 #include <string.h>
+#include <time.h>
 #define MaxNome 100
 #define MaxCPF 12
 struct variaveisMenu{
@@ -17,6 +18,7 @@ struct registro{
     float saldo;
     bool contaPoupanca;
     bool contaCorrente;
+    int codigoConta;
 };
 bool menu();
 void abrirConta();

@@ -55,14 +55,23 @@ void fazerEmprestimo(){
     return;
 }
 void abrirConta(){
+    FILE* fp;
     registro cadastro;
     var z;
+    srand(time(NULL));
+    cadastro.codigoConta = rand() % 9000 + 1000;
+    fp = fopen("Cadastro.txt","w");
+    if (fp == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    cadastro.saldo = 0;
     printf("Nome(MAX: 99): ");
-    scanf("%99[^\n]s",cadastro.nome);
-    while(getchar() == '\n');
+    scanf(" %99[^\n]s", cadastro.nome);
+    while(getchar() != '\n');
     printf("CPF(MAX: 11): ");
-    scanf("%11[^\n]s",cadastro.CPF);
-    while(getchar() == '\n');
+    scanf("%11s",cadastro.CPF);
+    while(getchar() != '\n');
     printf("Idade: ");
     scanf("%i", &(cadastro.idade));
     if(cadastro.idade < 18){
@@ -76,18 +85,28 @@ void abrirConta(){
         scanf("%i",&z.opcao);
         if (z.opcao == 1)
         {
+        
             cadastro.contaCorrente = true;
+            
             break;
         }else if(z.opcao == 2){
             cadastro.contaPoupanca = true;
+            
             break;
+
         }else{
             printf("Opcao invalida...\nPressione enter para continuar...");
             fflush(stdin);
             scanf("%c",&(z.enter));
         }
     }
-    
+    fprintf(fp, "Nome: %s\n", cadastro.nome);
+    fprintf(fp, "CPF: %s\n",cadastro.CPF);
+    fprintf(fp, "Idade: %i\n", &(cadastro.idade));
+    fprintf(fp, "IdConta: %i\n", &(cadastro.codigoConta));
+    fprintf(fp, "Saldo: %.2f\n", &(cadastro.saldo));
+    fclose(fp);
+    menu();
 }
 
 int Executavel(){
