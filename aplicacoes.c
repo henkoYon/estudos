@@ -9,6 +9,7 @@ bool menu(){
     printf("(4)Fazer saque\n");
     printf("(5)Fechar conta\n");
     printf("(6)Fazer emprestimo\n");
+    printf("Ou 0 para sair...\n");
     printf("Escolha a opcao: ");
     scanf("%i",&escolha.opcao);
     switch (escolha.opcao)
@@ -31,6 +32,8 @@ bool menu(){
     case 6:
         fazerEmprestimo();
         break;
+    case 0:
+        return false;
     default:
         printf("Opcao invalida.\n Pressione Enter para continuar...");
         fflush(stdin);
@@ -58,20 +61,23 @@ void abrirConta(){
     FILE* fp;
     registro cadastro;
     var z;
-    srand(time(NULL));
-    cadastro.codigoConta = rand() % 9000 + 1000;
-    fp = fopen("Cadastro.txt","w");
-    if (fp == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        return;
-    }
+    char linha[100];
+    fp = fopen("Cadastro.txt","r+");
+    
     cadastro.saldo = 0;
     printf("Nome(MAX: 99): ");
     scanf(" %99[^\n]s", cadastro.nome);
     while(getchar() != '\n');
     printf("CPF(MAX: 11): ");
     scanf("%11s",cadastro.CPF);
-    while(getchar() != '\n');
+    while(fgets(linha, 100, fp) != NULL){
+        if(strstr(linha, cadastro.CPF) != NULL){
+            printf("CPF ja existe no cadastro!\nPressione enter para continuar...");
+            fflush(stdin);
+            scanf("%c",&z.enter);
+            menu();
+        }
+    }
     printf("Idade: ");
     scanf("%i", &(cadastro.idade));
     if(cadastro.idade < 18){
