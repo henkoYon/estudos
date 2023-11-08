@@ -6,7 +6,7 @@
 #include <time.h>
 #define MaxNome 100
 #define MaxCPF 12
-int autoIncrementa = 0;
+
 struct variaveisMenu{
     int opcao;
     char enter;

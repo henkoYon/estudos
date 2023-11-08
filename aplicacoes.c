@@ -43,6 +43,17 @@ bool menu(){
     }
 }
 void listarClientes(){
+    var z;
+    FILE* fp;
+    char linha [200];
+    system("cls");
+    fp = fopen("Cadastro.txt", "r+");
+    while(fgets(linha,sizeof(linha), fp) != NULL){
+        printf("%s", linha);
+    }
+    printf("\nPressione enter para voltar...");
+    fclose(fp);
+    scanf("%c",z.enter);
     return;
 }
 void fazerDeposito(){
