@@ -34,6 +34,7 @@ bool menu(){
         break;
     case 0:
         return false;
+        break;
     default:
         printf("Opcao invalida.\n Pressione Enter para continuar...");
         fflush(stdin);
@@ -41,6 +42,7 @@ bool menu(){
         return true;
         break;
     }
+    return true;
 }
 void listarClientes(){
     var z;
@@ -49,11 +51,16 @@ void listarClientes(){
     system("cls");
     fp = fopen("Cadastro.txt", "r+");
     while(fgets(linha,sizeof(linha), fp) != NULL){
+        printf("______________________________________\n");
         printf("%s", linha);
     }
+    printf("______________________________________\n");
     printf("\nPressione enter para voltar...");
+    fflush(stdin);
+    while(getchar() != '\n'){
+        scanf("%c",z.enter);
+    }
     fclose(fp);
-    scanf("%c",z.enter);
     return;
 }
 void fazerDeposito(){
@@ -86,7 +93,7 @@ void abrirConta(){
             printf("CPF ja existe no cadastro!\nPressione enter para continuar...");
             fflush(stdin);
             scanf("%c",&z.enter);
-            menu();
+            return;
         }
     }
     printf("Idade: ");
@@ -104,11 +111,11 @@ void abrirConta(){
         {
         
             cadastro.contaCorrente = true;
-            
+            cadastro.contaPoupanca = false;
             break;
         }else if(z.opcao == 2){
             cadastro.contaPoupanca = true;
-            
+            cadastro.contaCorrente = false;
             break;
 
         }else{
@@ -120,10 +127,12 @@ void abrirConta(){
     fprintf(fp, "Nome: %s\n", cadastro.nome);
     fprintf(fp, "CPF: %s\n",cadastro.CPF);
     fprintf(fp, "Idade: %i\n", &(cadastro.idade));
+    fprintf(fp,"Conta Corrente: %s\n", cadastro.contaCorrente == true? "Ativo": "Nao ativo");
+    fprintf(fp,"Conta Poupanca: %s\n", cadastro.contaPoupanca == true? "Ativo": "Nao ativo");
     fprintf(fp, "IdConta: %i\n", &(cadastro.codigoConta));
     fprintf(fp, "Saldo: %.2f\n", &(cadastro.saldo));
     fclose(fp);
-    menu();
+    return;
 }
 
 int Executavel(){
