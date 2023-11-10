@@ -64,24 +64,51 @@ void listarClientes(){
     return;
 }
 void fazerDeposito(){
-    return;
+    
 }
 void fazerSaque(){
     return;
 }
 void fecharConta(){
+    FILE*fp;
+    FILE*fptemp;
+    registro cadastro;
+    var z;
+    char linha[1024];
+    int conta = 0;
+    fp = fopen("Cadastro.txt", "a+");
+    fptemp = fopen("Temp.txt", "w");
+    printf("Digite o codigo da Conta: ");
+    scanf("%i",&cadastro.codigoConta);
+    z.continuar = false;
+    while(fgets(linha, sizeof(linha), fp) != NULL){
+        fscanf(fp, "%i", &conta);
+        if(conta != cadastro.codigoConta){
+            fputs(linha, fptemp);
+        }else{
+            z.continuar = true;
+        }
+        }
+    if(z.continuar){
+        printf("Conta não encontrada, pressione enter para continuar....");
+        fflush(stdin);
+        scanf("%c",&z.enter);
+    }
+    fclose(fp);
+    fclose(fptemp);
+    remove("Cadastro.txt");
+    rename("Temp.txt", "Cadastro.txt");
     return;
 }
 void fazerEmprestimo(){
     return;
 }
 void abrirConta(){
-    FILE* fp;
+    FILE* fp, fpTemp;
     registro cadastro;
     var z;
     char linha[100];
     fp = fopen("Cadastro.txt","r+");
-    
     cadastro.saldo = 0;
     printf("Nome(MAX: 99): ");
     scanf(" %99[^\n]s", cadastro.nome);
@@ -89,6 +116,7 @@ void abrirConta(){
     printf("CPF(MAX: 11): ");
     scanf("%11s",cadastro.CPF);
     while(fgets(linha, 100, fp) != NULL){
+
         if(strstr(linha, cadastro.CPF) != NULL){
             printf("CPF ja existe no cadastro!\nPressione enter para continuar...");
             fflush(stdin);
@@ -97,7 +125,7 @@ void abrirConta(){
         }
     }
     printf("Idade: ");
-    scanf("%i", &(cadastro.idade));
+    scanf("%i", &cadastro.idade);
     if(cadastro.idade < 18){
         printf("Cliente menor de idade.\n Pressione enter para voltar ao menu...");
         fflush(stdin);
@@ -124,13 +152,15 @@ void abrirConta(){
             scanf("%c",&(z.enter));
         }
     }
+    srand(time(NULL));
+    cadastro.codigoConta = rand() %90000 + 10000;
+    fprintf(fp, "IdConta: %i\n", cadastro.codigoConta);
     fprintf(fp, "Nome: %s\n", cadastro.nome);
     fprintf(fp, "CPF: %s\n",cadastro.CPF);
-    fprintf(fp, "Idade: %i\n", &(cadastro.idade));
+    fprintf(fp, "Idade: %i\n", cadastro.idade);
     fprintf(fp,"Conta Corrente: %s\n", cadastro.contaCorrente == true? "Ativo": "Nao ativo");
     fprintf(fp,"Conta Poupanca: %s\n", cadastro.contaPoupanca == true? "Ativo": "Nao ativo");
-    fprintf(fp, "IdConta: %i\n", &(cadastro.codigoConta));
-    fprintf(fp, "Saldo: %.2f\n", &(cadastro.saldo));
+    fprintf(fp, "Saldo: %.2f\n", cadastro.saldo);
     fclose(fp);
     return;
 }
