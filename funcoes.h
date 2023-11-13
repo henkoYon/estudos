@@ -13,13 +13,13 @@ struct variaveisMenu{
     bool continuar;
 };
 struct registro{
+    int codigoConta;
     char nome[MaxNome];
     char CPF[MaxCPF];
     int idade;
     float saldo;
     bool contaPoupanca;
     bool contaCorrente;
-    int codigoConta;
 };
 bool menu();
 void abrirConta();

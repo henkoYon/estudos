@@ -63,8 +63,24 @@ void listarClientes(){
     fclose(fp);
     return;
 }
-void fazerDeposito(){
-    
+void fazerDeposito(){/*
+    FILE*fp;
+    registro cadastro;
+    registro dados;
+    var z;
+    char linha[1024];
+    fp = fopen("Cadastro.txt","w");
+    while(fgets(fp, linha, "Cadastro.txt") !=NULL){
+        printf("Digite o codigo da Conta: ");
+        scanf("%i",z.opcao);
+        printf("Digite o valor que deseja depositar: ");
+        scanf("%i",cadastro.saldo);
+        while(z.opcao == fscanf(fp, linha)){
+                fseek(fp, 6*sizeof(registro), SEEK_SET);
+                fscanf("%f", &dados.saldo);
+
+        }
+    }*/
 }
 void fazerSaque(){
     return;
@@ -75,31 +91,43 @@ void fecharConta(){
     registro cadastro;
     var z;
     char linha[1024];
-    int conta = 0;
-    fp = fopen("Cadastro.txt", "a+");
+    int conta;
+    fp = fopen("Cadastro.txt", "r");
     fptemp = fopen("Temp.txt", "w");
     printf("Digite o codigo da Conta: ");
     scanf("%i",&cadastro.codigoConta);
     z.continuar = false;
     while(fgets(linha, sizeof(linha), fp) != NULL){
+        while ((linha == getchar()) != '\n' && linha != EOF);
         fscanf(fp, "%i", &conta);
-        if(conta != cadastro.codigoConta){
-            fputs(linha, fptemp);
+        printf("%i\n",conta);
+        if(conta == cadastro.codigoConta){
+            z.continuar = true; 
+            for(int i = 0; i < 6; i++){
+            fgets(linha, sizeof(linha), fp);
+        }
         }else{
-            z.continuar = true;
+            fputs(linha,fptemp);
         }
         }
     if(z.continuar){
-        printf("Conta não encontrada, pressione enter para continuar....");
+        printf("Conta nao encontrada, pressione enter para continuar....");
+        fflush(stdin);
+        scanf("%c",&z.enter);
+    }else
+    {
+        printf("Conta encontrada, pressione enter para continuar....");
         fflush(stdin);
         scanf("%c",&z.enter);
     }
+    
     fclose(fp);
     fclose(fptemp);
     remove("Cadastro.txt");
     rename("Temp.txt", "Cadastro.txt");
     return;
 }
+
 void fazerEmprestimo(){
     return;
 }
