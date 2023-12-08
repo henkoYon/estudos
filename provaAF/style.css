@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    position: relative; /* Adicionado para posicionar os botões relativos ao formulário */
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-group label {
+    margin-bottom: 4px;
+    display: block;
+    color: #333;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões no canto direito */
+  }
+  
+  input[type="reset"],
+  input[type="submit"] {
+    width: auto; /* Largura automática para botões menores */
+    padding: 8px; /* Tamanho menor de padding */
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  
+  input[type="reset"] {
+    background-color: #ff4d4d;
+    color: #fff;
+  }
+  
+  input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  input[type="reset"]:hover {
+    background-color: #e60000;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  #mensagem_confirmacao {
+    margin-top: 10px;
+    color: #333;
+  }
+  
